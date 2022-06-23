@@ -134,7 +134,7 @@ def find_food(my_head, possible_moves, foods):
         return 'right'
     if closest_food['y'] > my_head['y'] and 'up' in possible_moves:
         return 'up'
-    if 'left' in possible_moves:
+    if 'left' in possible_moves and closest_food['y'] < my_head['y']:
         return 'left'
     return 'down'
 
