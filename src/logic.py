@@ -104,7 +104,6 @@ def avoid_snakes(my_head, possible_moves, snakes):
         possible_moves =  avoid_hazards(my_head, possible_moves, snake['body'])
     return possible_moves
 
-
 def avoid_hazards(my_head, possible_moves, hazards):
     for hazard in hazards:
         if (hazard['x'] != my_head['x'] and hazard['y'] != my_head['y']):
