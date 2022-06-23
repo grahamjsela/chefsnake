@@ -102,26 +102,18 @@ def avoid_snakes(my_head, possible_moves, snakes):
     for snake in snakes:
         for body in snake['body']:
             if (body['y'] - 1 == my_head['y']):
-                if (possible_moves['up']): possible_moves.remove('up')
+                if 'up' in possible_moves: possible_moves.remove('up')
             if (body['y'] + 1 == my_head['y']):
-                if (possible_moves['down']):possible_moves.remove('down')
+                if 'down' in possible_moves: possible_moves.remove('down')
             if (body['x'] - 1 == my_head['x']):
-                if (possible_moves['right']):possible_moves.remove('right')
+                if 'right' in possible_moves: possible_moves.remove('right')
             if (body['x'] + 1 == my_head['x']):
-                if (possible_moves['left']):possible_moves.remove('left')
+                if 'left' in possible_moves: possible_moves.remove('left')
 
     return possible_moves
 
 
 def _avoid_my_neck(my_body: dict, possible_moves: List[str]) -> List[str]:
-    """
-    my_body: List of dictionaries of x/y coordinates for every segment of a Battlesnake.
-            e.g. [{"x": 0, "y": 0}, {"x": 1, "y": 0}, {"x": 2, "y": 0}]
-    possible_moves: List of strings. Moves to pick from.
-            e.g. ["up", "down", "left", "right"]
-
-    return: The list of remaining possible_moves, with the 'neck' direction removed
-    """
     my_head = my_body[0]  # The first body coordinate is always the head
     # The segment of body right after the head is the 'neck'
     my_neck = my_body[1]
