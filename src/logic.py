@@ -77,11 +77,11 @@ def choose_move(data: dict) -> str:
     return move
 
 def avoid_walls(height, width, my_body, possible_moves):
-    if (height == my_body[0]['y']):
+    if (height - 1 == my_body[0]['y']):
         possible_moves.remove('up')
     if (my_body[0]['y'] == 0):
         possible_moves.remove('down')
-    if (width == my_body[0]['x']):
+    if (width - 1 == my_body[0]['x']):
         possible_moves.remove('right')
     if (my_body[0]['x'] == 0):
         possible_moves.remove('left')
