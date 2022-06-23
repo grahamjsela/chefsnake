@@ -98,7 +98,6 @@ def avoid_walls(height, width, my_head, possible_moves):
 
 
 def avoid_snakes(my_head, possible_moves, snakes):
-    print(snakes)
     for snake in snakes:
         for body in snake['body']:
             if (body['y'] - 1 == my_head['y']):
@@ -106,8 +105,10 @@ def avoid_snakes(my_head, possible_moves, snakes):
             if (body['y'] + 1 == my_head['y']):
                 if 'down' in possible_moves: possible_moves.remove('down')
             if (body['x'] - 1 == my_head['x']):
+                print(body)
                 if 'right' in possible_moves: possible_moves.remove('right')
             if (body['x'] + 1 == my_head['x']):
+                print(body)
                 if 'left' in possible_moves: possible_moves.remove('left')
 
     return possible_moves
