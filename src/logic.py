@@ -54,12 +54,13 @@ def choose_move(data: dict) -> str:
 
     # TODO: Step 1 - Don't hit walls.
     # Use information from `data` and `my_head` to not move beyond the game board.
-    # board = data['board']
-    # board_height = ?
-    # board_width = ?
+    board = data['board']
+    board_height = board['height']
+    board_width = board['width']
 
     # TODO: Step 2 - Don't hit yourself.
     # Use information from `my_body` to avoid moves that would collide with yourself.
+    possible_moves = avoid_walls(board_height, board_width, my_body, possible_moves)
 
     # TODO: Step 3 - Don't collide with others.
     # Use information from `data` to prevent your Battlesnake from colliding with others.
@@ -69,12 +70,24 @@ def choose_move(data: dict) -> str:
     # food = data['board']['food']
 
     # Choose a random direction from the remaining possible_moves to move in, and then return that move
-    move = random.choice(possible_moves)
     # TODO: Explore new strategies for picking a move that are better than random
 
     print(f"{data['game']['id']} MOVE {data['turn']}: {move} picked from all valid options in {possible_moves}")
 
     return move
+
+def avoid_walls(height, width, my_body, possible_moves):
+    if (height == my_body[0]['y']):
+        possible_moves.remove('up')
+    if (my_body[0]['y'] == 0):
+        possible_moves.remove('down')
+    if (width == my_body[0]['x']):
+        possible_moves.remove('right')
+    if (my_body[0]['x'] == 0):
+        possible_moves.remove('left')
+    return possible_moves
+
+
 
 
 def _avoid_my_neck(my_body: dict, possible_moves: List[str]) -> List[str]:
