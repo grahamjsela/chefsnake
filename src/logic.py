@@ -60,9 +60,10 @@ def choose_move(data: dict) -> str:
 
     # TODO: Step 2 - Don't hit yourself.
     # Use information from `my_body` to avoid moves that would collide with yourself.
-    possible_moves = avoid_walls(board_height, board_width, my_body, possible_moves)
+    possible_moves = avoid_walls(board_height, board_width, my_head, possible_moves)
 
     move = possible_moves[0]
+    print(move)
 
     # TODO: Step 3 - Don't collide with others.
     # Use information from `data` to prevent your Battlesnake from colliding with others.
@@ -78,14 +79,14 @@ def choose_move(data: dict) -> str:
 
     return move
 
-def avoid_walls(height, width, my_body, possible_moves):
-    if (height - 1 == my_body[0]['y']):
+def avoid_walls(height, width, my_head, possible_moves):
+    if (height - 1 == my_head['y']):
         possible_moves.remove('up')
-    if (my_body[0]['y'] == 0):
+    if (my_head['y'] == 0):
         possible_moves.remove('down')
-    if (width - 1 == my_body[0]['x']):
+    if (width - 1 == my_head['x']):
         possible_moves.remove('right')
-    if (my_body[0]['x'] == 0):
+    if (my_head['x'] == 0):
         possible_moves.remove('left')
     return possible_moves
 
