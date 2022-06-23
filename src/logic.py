@@ -1,3 +1,4 @@
+from calendar import c
 import random
 from typing import List, Dict
 
@@ -67,7 +68,7 @@ def choose_move(data: dict) -> str:
         board_height, board_width, my_head, possible_moves)
     possible_moves = avoid_snakes(my_head, possible_moves, board["snakes"])
 
-    move = possible_moves[0]
+    move = find_food(my_head, possible_moves, board["food"])
     print(move)
 
     # TODO: Step 3 - Don't collide with others.
@@ -118,6 +119,24 @@ def avoid_snakes(my_head, possible_moves, snakes):
                     possible_moves.remove('left')
 
     return possible_moves
+
+
+def myfunc(my_x, my_y, food):
+    return abs(my_x - food['x']) + abs(my_y - food['y'])
+
+
+def find_food(my_head, possible_moves, foods):
+    closest_food = {'x': 1000000, 'y': 1000000}
+    for food in foods:
+        if myfunc(my_head['x'], my_head['y'], food) < myfunc(my_head['x'], my_head['y'], closest_food):
+            closest_food = food
+    if closest_food['x'] > my_head['x'] and 'right' in possible_moves:
+        return 'right'
+    if closest_food['y'] > my_head['y'] and 'up' in possible_moves:
+        return 'up'
+    if 'left' in possible_moves:
+        return 'left'
+    return 'down'
 
 
 def _avoid_my_neck(my_body: dict, possible_moves: List[str]) -> List[str]:
