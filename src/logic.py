@@ -65,7 +65,7 @@ def choose_move(data: dict) -> str:
     # Use information from `my_body` to avoid moves that would collide with yourself.
     possible_moves = avoid_walls(
         board_height, board_width, my_head, possible_moves)
-    possible_moves = avoid_snakes(my_head, possible_moves, data["snakes"])
+    possible_moves = avoid_snakes(my_head, possible_moves, board["snakes"])
 
     move = possible_moves[0]
     print(move)
