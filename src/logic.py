@@ -102,13 +102,13 @@ def avoid_snakes(my_head, possible_moves, snakes):
     for snake in snakes:
         for body in snake['body']:
             if (body['y'] - 1 == my_head['y']):
-                possible_moves.remove('up')
+                if (possible_moves['up']): possible_moves.remove('up')
             if (body['y'] + 1 == my_head['y']):
-                possible_moves.remove('down')
+                if (possible_moves['down']):possible_moves.remove('down')
             if (body['x'] - 1 == my_head['x']):
-                possible_moves.remove('right')
+                if (possible_moves['right']):possible_moves.remove('right')
             if (body['x'] + 1 == my_head['x']):
-                possible_moves.remove('left')
+                if (possible_moves['left']):possible_moves.remove('left')
 
     return possible_moves
 
