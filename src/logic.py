@@ -41,11 +41,11 @@ def choose_move(data: dict) -> str:
     my_body = my_snake["body"]  # A list of coordinate dictionaries like [{"x": 0, "y": 0}, {"x": 1, "y": 0}, {"x": 2, "y": 0}]
 
     # Uncomment the lines below to see what this data looks like in your output!
-    print(f"~~~ Turn: {data['turn']}  Game Mode: {data['game']['ruleset']['name']} ~~~")
-    print(f"All board data this turn: {data}")
-    print(f"My Battlesnake this turn is: {my_snake}")
-    print(f"My Battlesnakes head this turn is: {my_head}")
-    print(f"My Battlesnakes body this turn is: {my_body}")
+    # print(f"~~~ Turn: {data['turn']}  Game Mode: {data['game']['ruleset']['name']} ~~~")
+    # print(f"All board data this turn: {data}")
+    # print(f"My Battlesnake this turn is: {my_snake}")
+    # print(f"My Battlesnakes head this turn is: {my_head}")
+    # print(f"My Battlesnakes body this turn is: {my_body}")
 
     possible_moves = ["up", "down", "left", "right"]
 
@@ -61,6 +61,8 @@ def choose_move(data: dict) -> str:
     # TODO: Step 2 - Don't hit yourself.
     # Use information from `my_body` to avoid moves that would collide with yourself.
     possible_moves = avoid_walls(board_height, board_width, my_body, possible_moves)
+
+    move = possible_moves[0]
 
     # TODO: Step 3 - Don't collide with others.
     # Use information from `data` to prevent your Battlesnake from colliding with others.
