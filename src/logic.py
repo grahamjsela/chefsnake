@@ -136,7 +136,9 @@ def find_food(my_head, possible_moves, foods):
         return 'up'
     if 'left' in possible_moves and closest_food['x'] < my_head['x']:
         return 'left'
-    return 'down'
+    if 'down' in possible_moves and closest_food['y'] < my_head['y']:
+        return 'down'
+    return possible_moves[0]
 
 
 def _avoid_my_neck(my_body: dict, possible_moves: List[str]) -> List[str]:
