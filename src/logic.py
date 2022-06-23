@@ -67,6 +67,7 @@ def choose_move(data: dict) -> str:
     possible_moves = avoid_walls(
         board_height, board_width, my_head, possible_moves)
     possible_moves = avoid_snakes(my_head, possible_moves, board["snakes"])
+    possible_moves = avoid_hazards(my_head, possible_moves, board["hazards"])
 
     move = find_food(my_head, possible_moves, board["food"])
     print(move)
@@ -100,25 +101,28 @@ def avoid_walls(height, width, my_head, possible_moves):
 
 def avoid_snakes(my_head, possible_moves, snakes):
     for snake in snakes:
-        for body in snake['body']:
-            if (body['x'] != my_head['x'] and body['y'] != my_head['y']):
-                continue
-            if (body['y'] - 1 == my_head['y']):
-                if 'up' in possible_moves:
-                    possible_moves.remove('up')
-            if (body['y'] + 1 == my_head['y']):
-                if 'down' in possible_moves:
-                    possible_moves.remove('down')
-            if (body['x'] - 1 == my_head['x']):
-                print(body)
-                if 'right' in possible_moves:
-                    possible_moves.remove('right')
-            if (body['x'] + 1 == my_head['x']):
-                print(body)
-                if 'left' in possible_moves:
-                    possible_moves.remove('left')
-
+        possible_moves =  avoid_hazards(my_head, possible_moves, snake['body'])
     return possible_moves
+
+
+def avoid_hazards(my_head, possible_moves, hazards):
+    for hazard in hazards:
+        if (hazard['x'] != my_head['x'] and hazard['y'] != my_head['y']):
+            continue
+        if (hazard['y'] - 1 == my_head['y']):
+            if 'up' in possible_moves:
+                possible_moves.remove('up')
+        if (hazard['y'] + 1 == my_head['y']):
+            if 'down' in possible_moves:
+                possible_moves.remove('down')
+        if (hazard['x'] - 1 == my_head['x']):
+            if 'right' in possible_moves:
+                possible_moves.remove('right')
+        if (hazard['x'] + 1 == my_head['x']):
+            if 'left' in possible_moves:
+                possible_moves.remove('left')
+    return possible_moves
+
 
 
 def myfunc(my_x, my_y, food):
